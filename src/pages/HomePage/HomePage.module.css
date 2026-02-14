@@ -1,0 +1,17 @@
+.title {
+  text-align: center;
+  margin: 40px 0;
+
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  letter-spacing: 1px;
+
+  background: linear-gradient(90deg, #818cf8, #a855f7, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 0 25px rgba(168, 85, 247, 0.35),
+    0 10px 40px rgba(0, 0, 0, 0.6);
+}

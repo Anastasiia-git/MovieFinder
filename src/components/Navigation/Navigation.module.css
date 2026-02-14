@@ -1,0 +1,112 @@
+.header {
+  width: 100%;
+  min-height: 420px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(to bottom, rgba(10, 10, 25, 0.45), rgba(10, 10, 25, 0.75)),
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1920&q=80")
+      center / cover no-repeat;
+}
+
+.header::after {
+  z-index: 1;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 15% 25%,
+    rgba(99, 102, 241, 0.35),
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+.brand {
+  max-width: 600px;
+}
+
+.logo {
+  font-size: clamp(38px, 4vw, 64px);
+  font-weight: 900;
+  letter-spacing: 1px;
+
+  background: linear-gradient(90deg, #ffffff, #c7d2fe);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.tagline {
+  margin-top: 18px;
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 500px;
+
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.navLinks {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+
+  padding: 12px 20px;
+  border-radius: 30px;
+
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+}
+
+.link:hover {
+  color: #fff;
+  background: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.active {
+  background: #6366f1;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.6);
+}
+@media (max-width: 768px) {
+  .inner {
+    flex-direction: column;
+    gap: 22px;
+    align-items: flex-start;
+    padding: 46px 16px;
+  }
+
+  .navLinks {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
