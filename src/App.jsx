@@ -1,18 +1,23 @@
-import './App.css'
+import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Navigation from "./components/Navigation/Navigation";
+import Loader from "./components/Loader/Loader";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
-const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage/MovieDetailsPage"));
+const MovieDetailsPage = lazy(
+  () => import("./pages/MovieDetailsPage/MovieDetailsPage"),
+);
 const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
 const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
-const MovieReviews = lazy(() => import("./components/MovieReviews/MovieReviews"));
+const MovieReviews = lazy(
+  () => import("./components/MovieReviews/MovieReviews"),
+);
 
-function App() {  
+function App() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Loader />}>
       <Navigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -27,4 +32,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

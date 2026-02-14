@@ -14,9 +14,7 @@ const api = axios.create({
 
 export const getTrendingMovies = async () => {
   try {
-    // console.log("Fetching trending movies...");
     const response = await api.get("/trending/movie/day");
-    // console.log("Trending movies response:", response.data);
     return response.data.results;
   } catch (error) {
     console.error("Error fetching trending movies:", error.response || error);
@@ -26,7 +24,6 @@ export const getTrendingMovies = async () => {
 
 export const searchMovies = async (search) => {
   try {
-    // console.log("Searching movies with search:", search);
     const response = await api.get("/search/movie", {
       params: {
         query: search,
@@ -35,7 +32,6 @@ export const searchMovies = async (search) => {
         page: 1,
       },
     });
-    // console.log("Search movies response:", response.data);
     return response.data.results;
   } catch (error) {
     console.error("Error searching movies:", error.response || error);
@@ -44,12 +40,10 @@ export const searchMovies = async (search) => {
 };
 
 export const getDetail = async (movieId) => {
-   try {
-    //  console.log("Searching movies detail with:", movieId);
-     const response = await api.get(`/movie/${movieId}`); 
-    //  console.log("Movies detail response:", response.data);
-     return response.data;
-   } catch (error) {
+  try {
+    const response = await api.get(`/movie/${movieId}`);
+    return response.data;
+  } catch (error) {
     console.error("Error details movies:", error.response || error);
     throw error;
   }
@@ -57,9 +51,7 @@ export const getDetail = async (movieId) => {
 
 export const getCast = async (movieId) => {
   try {
-    // console.log("Searching cast detail with:", movieId);
     const response = await api.get(`/movie/${movieId}//credits`);
-    // console.log("Movies cast response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error cast movies:", error.response || error);
@@ -69,9 +61,7 @@ export const getCast = async (movieId) => {
 
 export const getReviews = async (movieId) => {
   try {
-    // console.log("Searching reviews detail with:", movieId);
     const response = await api.get(`/movie/${movieId}//reviews`);
-    // console.log("Movies reviews response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error reviews movies:", error.response || error);

@@ -8,6 +8,18 @@
   gap: 18px;
 
   width: 100%;
+
+  animation: fadeUp 0.35s ease both;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card {

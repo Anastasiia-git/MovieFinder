@@ -25,7 +25,6 @@ function MoviesPage() {
         setMovies([]);
         return;
       }
-
       try {
         setLoading(true);
         const searchResults = await searchMovies(searchParam);
@@ -47,13 +46,11 @@ function MoviesPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const value = searchQuery.trim();
     if (!value) {
       toast.error("Please enter a search query.");
       return;
     }
-
     setSearchParams({ search: value });
   };
 
@@ -89,12 +86,12 @@ function MoviesPage() {
       </header>
 
       <main>
-        {loading ? (
-          <Loader loading={loading} />
-        ) : movies.length > 0 ? (
-          <MovieList movies={movies} />
-        ) : (
-          searchParam && <p>Sorry, we didn't find anything 😢</p>
+        {loading && <Loader />}
+
+        {!loading && movies.length > 0 && <MovieList movies={movies} />}
+
+        {!loading && movies.length === 0 && searchParam && (
+          <p>Sorry, we didn't find anything 😢</p>
         )}
       </main>
     </>
