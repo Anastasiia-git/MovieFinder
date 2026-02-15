@@ -1,12 +1,57 @@
-# React + Vite
+🎬 Movie Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern movie search application built with React and powered by the TMDB API.
+The app allows users to search for movies, explore detailed information, browse cast and reviews, and navigate smoothly with a cinematic UI design.
 
-Currently, two official plugins are available:
+✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔍 Search movies by title
+🎥 Movie details page
+👥 Cast information
+📝 User reviews
+⚡ Lazy loading with React Suspense
+🎨 Modern glass-style UI
+📱 Fully responsive layout
 
-## Expanding the ESLint configuration
+🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+React
+React Router DOM
+Axios
+React Hot Toast
+React Spinners
+CSS Modules
+TMDB API
+
+🚀 Getting Started
+
+Clone the repository:
+git clone https://github.com/your-username/movie-explorer.git
+cd movie-explorer
+
+Install dependencies:
+
+npm install
+Run the development server:
+npm run dev
+
+🔑 API Configuration
+
+This project uses the TMDB API.
+Create a .env file in the root directory and add your API key:
+VITE_API_KEY=your_api_key_here
+Never commit your API keys to GitHub.
+
+📌 Project Purpose
+
+This project was created as a frontend practice application to improve skills in:
+
+Routing
+API integration
+State management
+Component architecture
+UI/UX design
+
+📄 License
+
+Educational project.
