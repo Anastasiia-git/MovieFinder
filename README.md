@@ -1,4 +1,4 @@
-🎬 Movie Explorer
+🎬 Movie Finder
 
 A modern movie search application built with React and powered by the TMDB API.
 The app allows users to search for movies, explore detailed information, browse cast and reviews, and navigate smoothly with a cinematic UI design.
