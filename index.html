@@ -2,12 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- fonts (optional speed-up) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
 
-    <link rel="icon" type="image/svg+xml" href="/public/clapper-color.png" />
+    <!-- favicons -->
+    <link rel="icon" type="image/svg+xml" href="/clapper-color.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MovieFinder</title>
 
@@ -23,7 +30,16 @@
       content="Search movies, view details, cast, and reviews in one place."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/preview.jpg" />
+    <meta
+      property="og:url"
+      content="https://movie-finder-ebon-zeta.vercel.app/"
+    />
+    <meta
+      property="og:image"
+      content="https://movie-finder-ebon-zeta.vercel.app/clapper-color.png"
+    />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -32,7 +48,12 @@
       name="twitter:description"
       content="Find movies fast with detailed info and reviews."
     />
+    <meta
+      name="twitter:image"
+      content="https://movie-finder-ebon-zeta.vercel.app/clapper-color.png"
+    />
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
