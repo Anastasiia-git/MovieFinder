@@ -35,7 +35,6 @@ Environment-based configuration
 
 🛠 Tech Stack
 
-Frontend
 React
 React Router DOM
 Axios
