@@ -7,15 +7,18 @@ function MovieReviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const getMovieReviews = async () => {
       try {
         setLoading(true);
+        setError("");
         const data = await getReviews(movieId);
         setReviews(data?.results ?? []);
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        setError("Failed to load reviews.");
       } finally {
         setLoading(false);
       }
@@ -28,10 +31,14 @@ function MovieReviews() {
     return <p className={s.message}>Loading reviews...</p>;
   }
 
+  if (error) {
+    return <p className={s.message}>{error}</p>;
+  }
+
   if (reviews.length === 0) {
     return (
       <p className={s.message}>
-        Sorry, but we don't have any reviews for this movie.
+        Sorry, but we do not have any reviews for this movie.
       </p>
     );
   }

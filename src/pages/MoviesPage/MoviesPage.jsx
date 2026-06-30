@@ -91,7 +91,7 @@ function MoviesPage() {
         {!loading && movies.length > 0 && <MovieList movies={movies} />}
 
         {!loading && movies.length === 0 && searchParam && (
-          <p>Sorry, we didn't find anything 😢</p>
+          <p>Sorry, we did not find anything.</p>
         )}
       </main>
     </>

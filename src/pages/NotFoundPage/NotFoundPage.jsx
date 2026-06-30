@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-import s from "./NotFoundPage.module.css"
+import s from "./NotFoundPage.module.css";
 
 function NotFoundPage() {
   return (
-    <nav className={s.nav}>
-      We found nothing 😢 Click{" "}
+    <main className={s.page}>
+      <p className={s.text}>We found nothing.</p>
       <Link className={s.scr} to="/">
-        here
-      </Link>{" "}
-      and return to the Home page
-    </nav>
+        Return to the Home page
+      </Link>
+    </main>
   );
 }
 
-export default NotFoundPage
+export default NotFoundPage;

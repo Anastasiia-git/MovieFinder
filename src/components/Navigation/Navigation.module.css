@@ -40,7 +40,7 @@
 }
 
 .logo {
-  font-size: clamp(38px, 4vw, 64px);
+  font-size: 64px;
   font-weight: 900;
   letter-spacing: 1px;
 
@@ -54,7 +54,7 @@
 
 .tagline {
   margin-top: 18px;
-  font-size: clamp(18px, 1.5vw, 22px);
+  font-size: 22px;
   line-height: 1.6;
 
   color: rgba(255, 255, 255, 0.85);
@@ -108,5 +108,13 @@
     width: 100%;
     justify-content: flex-start;
     flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 38px;
+  }
+
+  .tagline {
+    font-size: 18px;
   }
 }

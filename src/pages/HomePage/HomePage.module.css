@@ -2,7 +2,7 @@
   text-align: center;
   margin: 40px 0;
 
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: 56px;
   font-weight: 800;
   letter-spacing: 1px;
 
@@ -14,4 +14,25 @@
   text-shadow:
     0 0 25px rgba(168, 85, 247, 0.35),
     0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.message {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+@media (max-width: 900px) {
+  .title {
+    font-size: 44px;
+  }
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 32px;
+  }
 }

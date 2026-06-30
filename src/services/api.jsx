@@ -2,18 +2,25 @@ import axios from "axios";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
+const API_TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTY3YTQ3M2JlNDg2ZGM0N2YzODc3MDdiZTY3OTUzYiIsIm5iZiI6MTc0NTMzMjQwNy44NzUsInN1YiI6IjY4MDdhOGI3MTVhMWQ1YTYxNGFhN2FhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dQ0g2wOzNnhSXcthdBjp2fHCHr7HdUOP9rwA-MIMutU",
+    Authorization: API_TOKEN ? `Bearer ${API_TOKEN}` : "",
   },
 });
 
+const checkToken = () => {
+  if (!API_TOKEN) {
+    throw new Error("Missing VITE_TMDB_TOKEN in environment variables");
+  }
+};
+
 export const getTrendingMovies = async () => {
   try {
+    checkToken();
     const response = await api.get("/trending/movie/day");
     return response.data.results;
   } catch (error) {
@@ -24,6 +31,7 @@ export const getTrendingMovies = async () => {
 
 export const searchMovies = async (search) => {
   try {
+    checkToken();
     const response = await api.get("/search/movie", {
       params: {
         query: search,
@@ -41,6 +49,7 @@ export const searchMovies = async (search) => {
 
 export const getDetail = async (movieId) => {
   try {
+    checkToken();
     const response = await api.get(`/movie/${movieId}`);
     return response.data;
   } catch (error) {
@@ -51,7 +60,8 @@ export const getDetail = async (movieId) => {
 
 export const getCast = async (movieId) => {
   try {
-    const response = await api.get(`/movie/${movieId}//credits`);
+    checkToken();
+    const response = await api.get(`/movie/${movieId}/credits`);
     return response.data;
   } catch (error) {
     console.error("Error cast movies:", error.response || error);
@@ -61,7 +71,8 @@ export const getCast = async (movieId) => {
 
 export const getReviews = async (movieId) => {
   try {
-    const response = await api.get(`/movie/${movieId}//reviews`);
+    checkToken();
+    const response = await api.get(`/movie/${movieId}/reviews`);
     return response.data;
   } catch (error) {
     console.error("Error reviews movies:", error.response || error);

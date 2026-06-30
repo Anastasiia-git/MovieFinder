@@ -9,27 +9,43 @@ import { useEffect, useState, useRef } from "react";
 import { getDetail, IMG_BASE_URL } from "../../services/api";
 import s from "./MovieDetailsPage.module.css";
 import clsx from "clsx";
+import Loader from "../../components/Loader/Loader";
 
 function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const location = useLocation();
   const goBackRef = useRef(location.state ?? "/movies");
 
   useEffect(() => {
     const getMovieDetails = async () => {
       try {
+        setLoading(true);
+        setError("");
         const data = await getDetail(movieId);
         setMovie(data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        setError("Failed to load movie details. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
     getMovieDetails();
   }, [movieId]);
 
-  if (!movie) return null;
+  if (loading) return <Loader />;
+
+  if (error) {
+    return <p className={s.message}>{error}</p>;
+  }
+
+  if (!movie) {
+    return <p className={s.message}>Movie was not found.</p>;
+  }
 
   const poster = movie.backdrop_path && `${IMG_BASE_URL}${movie.backdrop_path}`;
 

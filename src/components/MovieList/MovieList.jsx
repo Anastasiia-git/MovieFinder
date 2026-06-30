@@ -10,10 +10,6 @@ function MovieList({ movies }) {
   return (
     <ul className={s.grid}>
       {movies.map((movie) => {
-        const poster = movie.poster_path
-          ? `${IMG_BASE_URL}${movie.poster_path}`
-          : "https://via.placeholder.com/500x750?text=No+Poster";
-
         return (
           <li className={s.card} key={movie.id}>
             <Link

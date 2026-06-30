@@ -7,6 +7,7 @@ import s from "./HomePage.module.css";
 function HomePages() {
   const [hits, setHits] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const getTrendingData = async () => {
@@ -15,7 +16,8 @@ function HomePages() {
         const trendingData = await getTrendingMovies();
         setHits(trendingData);
       } catch (err) {
-        console.log(err.messege);
+        console.error(err.message);
+        setError("Failed to load trending movies. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -26,8 +28,9 @@ function HomePages() {
   return (
     <div>
       <h1 className={s.title}>Trending Today</h1>
-      <MovieList movies={hits} />
       {loading && <Loader loading={loading} />}
+      {!loading && error && <p className={s.message}>{error}</p>}
+      {!loading && !error && <MovieList movies={hits} />}
     </div>
   );
 }

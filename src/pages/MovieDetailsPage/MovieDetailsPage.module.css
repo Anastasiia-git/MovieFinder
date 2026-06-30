@@ -72,7 +72,7 @@
 
 .title {
   margin: 0;
-  font-size: clamp(28px, 3.2vw, 44px);
+  font-size: 44px;
   font-weight: 900;
   letter-spacing: 0.3px;
 
@@ -224,9 +224,22 @@
   padding-top: 8px;
 }
 
+.message {
+  width: min(1100px, calc(100% - 32px));
+  margin: 40px auto;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+
 @media (max-width: 900px) {
   .card {
     grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 36px;
   }
 }
 
@@ -234,5 +247,9 @@
   .card,
   .tabsCard {
     padding: 14px;
+  }
+
+  .title {
+    font-size: 28px;
   }
 }

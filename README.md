@@ -1,98 +1,117 @@
-🎬 Movie Finder
+# Movie Finder
 
-🌍 Live Demo
-👉 https://movie-finder-ebon-zeta.vercel.app/
+Movie Finder is a responsive React application for searching movies and viewing details from The Movie Database API.
 
-📸 Screenshots
+## Live Demo
 
-🏠 Home Page
+[Open Movie Finder](https://movie-finder-ebon-zeta.vercel.app/)
+
+## Screenshots
+
+### Home Page
+
 ![Home](screenshots/home.png)
 
-🔎 Search Page
+### Search Page
+
 ![Search](screenshots/search.png)
 
-🎥 Movie Details
+### Movie Details
+
 ![Details](screenshots/details.png)
 
-✨ Features
+## Features
 
-🔍 Instant movie search
-🎬 Detailed movie pages
-👥 Cast information
-📝 Reviews section
-⚡ Lazy loading (React Suspense)
-🎨 Glassmorphism cinematic UI
-📱 Fully responsive design
-🔄 Client-side routing
-🚀 Fast API data fetching
+- Trending movies on the home page
+- Movie search with query params in the URL
+- Movie details page with release date, overview, genres, cast, and reviews
+- Client-side routing with nested routes
+- Loading and empty states
+- Responsive layout for desktop, tablet, and mobile screens
 
-🧠 Architecture Highlights
-Component-driven structure
-Separation of UI + logic layers
-Reusable UI components
-Scalable routing system
-Environment-based configuration
+## Tech Stack
 
-🛠 Tech Stack
+- React
+- React Router DOM
+- Axios
+- CSS Modules
+- React Hot Toast
+- React Spinners
+- Vite
+- TMDB API
 
-React
-React Router DOM
-Axios
-CSS Modules
-React Hot Toast
-React Spinners
-API
-TMDB (The Movie Database)
+## Project Structure
 
-📂 Project Structure
-
+```text
 src
-┣ components
-┣ pages
-┣ services
-┣ hooks
-┣ styles
-┗ utils
+|-- components
+|-- pages
+|-- services
+|-- App.jsx
+|-- App.css
+|-- index.css
+|-- main.jsx
+```
 
-🚀 Getting Started
+## Requirements
 
-Clone project
+- Node.js 18 or later
+- TMDB read access token
+
+## Getting Started
+
+Clone the project:
+
+```bash
 git clone https://github.com/Anastasiia-git/MovieFinder.git
-cd movie-explorer
-Install dependencies
+cd MovieFinder
+```
+
+Install dependencies:
+
+```bash
 npm install
-Run locally
+```
+
+Create a `.env` file in the project root:
+
+```bash
+VITE_TMDB_TOKEN=your_tmdb_read_access_token
+```
+
+Run the project locally:
+
+```bash
 npm run dev
+```
 
-🔑 Environment Variables
+## Available Scripts
 
-Create .env file in root:
-VITE_API_KEY=your_api_key_here
-⚠️ Never commit API keys.
+```bash
+npm run dev
+npm run build
+npm run lint
+npm run preview
+```
 
-🎯 Project Goals
+## What This Project Shows
 
-This project was built to strengthen real-world frontend development skills:
-API integration
-Routing architecture
-State management patterns
-Scalable component design
-UX/UI polish
+- Working with REST API data in React
+- Building route-based pages with React Router
+- Keeping UI components reusable and easy to read
+- Managing loading, empty, and error states
+- Styling with CSS Modules and responsive breakpoints
 
-🧩 Possible Future Improvements
+## Future Improvements
 
-Favorites / Watchlist
-Pagination
-Debounced search
-Skeleton loaders
-Unit testing
-Dark/light theme toggle
+- Add pagination for search results
+- Add a favorites or watchlist feature
+- Add debounced search input
+- Add skeleton loaders
+- Add basic component tests
 
-👨‍💻 Author
+## Author
 
 Anastasiia Totska
-GitHub → https://github.com/Anastasiia-git
 
-📄 License
-
-Educational project — free to use for learning purposes.
+[GitHub](https://github.com/Anastasiia-git)

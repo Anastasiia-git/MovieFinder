@@ -3,36 +3,45 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import s from "./MovieCast.module.css";
 
-const FALLBACK_AVATAR = "https://via.placeholder.com/300x450?text=No+Photo";
-
 function MovieCast() {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const getMovieCast = async () => {
       try {
+        setLoading(true);
+        setError("");
         const data = await getCast(movieId);
         setActors(data?.cast ?? []);
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        setError("Failed to load cast information.");
+      } finally {
+        setLoading(false);
       }
     };
 
     getMovieCast();
   }, [movieId]);
 
+  if (loading) {
+    return <p className={s.empty}>Loading cast...</p>;
+  }
+
+  if (error) {
+    return <p className={s.empty}>{error}</p>;
+  }
+
   if (actors.length === 0) {
-    return <p className={s.empty}>Sorry, but we don't have any information.</p>;
+    return <p className={s.empty}>Sorry, but we do not have any information.</p>;
   }
 
   return (
     <ul className={s.grid}>
       {actors.map((actor) => {
-        const imgSrc = actor.profile_path
-          ? `${IMG_BASE_URL}${actor.profile_path}`
-          : FALLBACK_AVATAR;
-
         return (
           <li key={actor.id} className={s.card}>
             <div className={s.avatarWrap}>

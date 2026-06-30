@@ -52,8 +52,6 @@ button {
 img {
   display: block;
   max-width: 100%;
-  width: 360px;
-  height: 200px;
 }
 .loader {
   display: flex;
