@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import s from "./Navigation.module.css";
 import clsx from "clsx";
 
@@ -8,12 +8,12 @@ const Navigation = () => {
   return (
     <header className={s.header}>
       <div className={s.inner}>
-        <div className={s.brand}>
-          <div className={s.logo}>🎬 MovieFinder</div>
-          <p className={s.tagline}>
-            Search movies fast. Save time. Watch better.
-          </p>
-        </div>
+        <Link className={s.logo} to="/">
+          <img className={s.logoIcon} src="/favicon.png" alt="" />
+          <span>
+            Movie<span>Finder</span>
+          </span>
+        </Link>
 
         <nav className={s.navLinks}>
           <NavLink className={setActiveClass} to="/">

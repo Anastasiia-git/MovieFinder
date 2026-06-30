@@ -1,28 +1,40 @@
 .page {
-  width: min(1100px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 40px 0;
-
+  width: var(--content-width-sm);
+  margin: 48px auto 80px;
+  padding: 32px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-panel);
+  text-align: center;
 }
 
 .text {
-  font-size: 22px;
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-text);
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 900;
 }
 
 .scr {
   padding: 10px 14px;
-  border-radius: 999px;
-
+  border-radius: var(--radius-sm);
+  color: #04111d;
+  background: var(--color-accent);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 900;
+}
 
-  color: #fff;
-  background: #6366f1;
-  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.35);
+@media (min-width: 768px) {
+  .page {
+    padding: 40px 28px;
+  }
+
+  .text {
+    font-size: 30px;
+  }
 }

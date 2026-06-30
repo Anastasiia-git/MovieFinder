@@ -6,14 +6,30 @@ import {
   useLocation,
 } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { getDetail, IMG_BASE_URL } from "../../services/api";
+import { getDetail, getMovieVideos, IMG_BASE_URL } from "../../services/api";
 import s from "./MovieDetailsPage.module.css";
 import clsx from "clsx";
 import Loader from "../../components/Loader/Loader";
 
+const getTrailer = (videos) => {
+  const youtubeVideos = videos.filter((video) => video.site === "YouTube");
+
+  return (
+    youtubeVideos.find(
+      (video) => video.type === "Trailer" && video.official,
+    ) ??
+    youtubeVideos.find((video) => video.type === "Trailer") ??
+    youtubeVideos[0] ??
+    null
+  );
+};
+
 function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const [trailer, setTrailer] = useState(null);
+  const [posterLoading, setPosterLoading] = useState(false);
+  const [trailerLoading, setTrailerLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const location = useLocation();
@@ -24,8 +40,13 @@ function MovieDetailsPage() {
       try {
         setLoading(true);
         setError("");
-        const data = await getDetail(movieId);
-        setMovie(data);
+        const [movieData, videosData] = await Promise.all([
+          getDetail(movieId),
+          getMovieVideos(movieId),
+        ]);
+        setMovie(movieData);
+        setTrailer(getTrailer(videosData ?? []));
+        setPosterLoading(Boolean(movieData.backdrop_path));
       } catch (error) {
         console.error(error);
         setError("Failed to load movie details. Please try again later.");
@@ -36,6 +57,10 @@ function MovieDetailsPage() {
 
     getMovieDetails();
   }, [movieId]);
+
+  useEffect(() => {
+    setTrailerLoading(Boolean(trailer));
+  }, [trailer]);
 
   if (loading) return <Loader />;
 
@@ -48,6 +73,7 @@ function MovieDetailsPage() {
   }
 
   const poster = movie.backdrop_path && `${IMG_BASE_URL}${movie.backdrop_path}`;
+  const trailerUrl = trailer && `https://www.youtube.com/embed/${trailer.key}`;
 
   const setTabClass = ({ isActive }) => clsx(s.tab, isActive && s.tabActive);
 
@@ -88,9 +114,57 @@ function MovieDetailsPage() {
         </div>
 
         {poster && (
-          <div className={s.media}>
-            <img className={s.img} src={poster} alt={movie.title} />
+          <div className={s.media} aria-busy={posterLoading}>
+            {posterLoading && <Loader variant="overlay" />}
+            <img
+              className={clsx(s.img, posterLoading && s.imgLoading)}
+              src={poster}
+              alt={movie.title}
+              onLoad={() => setPosterLoading(false)}
+              onError={() => setPosterLoading(false)}
+            />
           </div>
+        )}
+      </section>
+
+      <section className={s.trailerCard}>
+        <div className={s.trailerHeader}>
+          <div>
+            <p className={s.sectionEyebrow}>Preview</p>
+            <h2 className={s.trailerTitle}>Watch trailer</h2>
+          </div>
+
+          {trailer && (
+            <a
+              className={s.youtubeLink}
+              href={`https://www.youtube.com/watch?v=${trailer.key}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open YouTube
+            </a>
+          )}
+        </div>
+
+        {trailerUrl ? (
+          <div className={s.trailerPlayer} aria-busy={trailerLoading}>
+            {trailerLoading && <Loader variant="overlay" />}
+            <iframe
+              className={clsx(
+                s.trailerFrame,
+                trailerLoading && s.trailerFrameLoading,
+              )}
+              src={trailerUrl}
+              title={`${movie.title} trailer`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              onLoad={() => setTrailerLoading(false)}
+            />
+          </div>
+        ) : (
+          <p className={s.trailerEmpty}>
+            Trailer is not available for this movie.
+          </p>
         )}
       </section>
 

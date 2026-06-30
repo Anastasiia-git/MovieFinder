@@ -47,6 +47,43 @@ export const searchMovies = async (search) => {
   }
 };
 
+export const getMovies = async ({ page = 1, genre, year, search } = {}) => {
+  try {
+    checkToken();
+    const endpoint = search ? "/search/movie" : "/discover/movie";
+    const response = await api.get(endpoint, {
+      params: {
+        query: search || undefined,
+        include_adult: false,
+        language: "en-US",
+        page,
+        sort_by: search ? undefined : "popularity.desc",
+        with_genres: genre || undefined,
+        primary_release_year: year || undefined,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching movies:", error.response || error);
+    throw error;
+  }
+};
+
+export const getMovieGenres = async () => {
+  try {
+    checkToken();
+    const response = await api.get("/genre/movie/list", {
+      params: {
+        language: "en-US",
+      },
+    });
+    return response.data.genres;
+  } catch (error) {
+    console.error("Error fetching movie genres:", error.response || error);
+    throw error;
+  }
+};
+
 export const getDetail = async (movieId) => {
   try {
     checkToken();
@@ -54,6 +91,17 @@ export const getDetail = async (movieId) => {
     return response.data;
   } catch (error) {
     console.error("Error details movies:", error.response || error);
+    throw error;
+  }
+};
+
+export const getMovieVideos = async (movieId) => {
+  try {
+    checkToken();
+    const response = await api.get(`/movie/${movieId}/videos`);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error movie videos:", error.response || error);
     throw error;
   }
 };
