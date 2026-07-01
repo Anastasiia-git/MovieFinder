@@ -23,9 +23,8 @@ MovieFinder is a responsive React application for discovering movies, browsing t
 ## Key Features
 
 - Browse trending movies on the home page
-- Search movies by title
+- Search movies by title after submitting the search form
 - Filter the catalog by genre and release year
-- Debounce search input updates to avoid unnecessary API requests while typing
 - Keep search, filter, and pagination state in URL query params
 - Open detailed movie pages with overview, release date, genres, cast, reviews, and trailer
 - Navigate nested routes for cast and reviews
@@ -50,7 +49,7 @@ MovieFinder is a responsive React application for discovering movies, browsing t
 - Reusable movie list, loader, navigation, footer, cast, and reviews components
 - Centralized API service layer for TMDB requests
 - URL-driven filters and pagination for shareable search results
-- Debounced search state for smoother catalog filtering
+- Explicit search form submit to avoid unnecessary API requests while typing
 - CSS Modules with shared design tokens and consistent `768px` / `1024px` breakpoints
 - Accessible loading indicators and semantic page structure
 - Basic Vitest and Testing Library coverage for reusable UI and helper logic
@@ -66,7 +65,6 @@ src
 |   |-- MovieList
 |   |-- MovieReviews
 |   `-- Navigation
-|-- hooks
 |-- pages
 |   |-- HomePage
 |   |-- MovieDetailsPage

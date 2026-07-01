@@ -12,7 +12,6 @@ import s from "./MoviesPage.module.css";
 import MovieList from "../../components/MovieList/MovieList";
 import Loader from "../../components/Loader/Loader";
 import FilterDropdown from "./FilterDropdown";
-import { useDebouncedValue } from "../../hooks/useDebouncedValue";
 import { getPaginationItems } from "./pagination";
 
 const currentYear = new Date().getFullYear();
@@ -46,7 +45,6 @@ function MoviesPage() {
   const [searchQuery, setSearchQuery] = useState(searchParam);
   const [selectedGenreId, setSelectedGenreId] = useState(genreParam);
   const [selectedYear, setSelectedYear] = useState(yearParam);
-  const debouncedSearchQuery = useDebouncedValue(searchQuery.trim(), 500);
   const selectedGenre =
     genres.find((genre) => String(genre.id) === selectedGenreId)?.name ??
     "All genres";
@@ -87,6 +85,11 @@ function MoviesPage() {
     [searchParams, setSearchParams],
   );
 
+  const closePickers = useCallback(() => {
+    setIsGenrePickerOpen(false);
+    setIsYearPickerOpen(false);
+  }, []);
+
   useEffect(() => {
     setSearchQuery(searchParam);
   }, [searchParam]);
@@ -111,17 +114,6 @@ function MoviesPage() {
 
     loadGenres();
   }, []);
-
-  useEffect(() => {
-    updateParams(
-      {
-        search: debouncedSearchQuery,
-        genre: debouncedSearchQuery ? "" : selectedGenreId,
-        year: selectedYear,
-      },
-      { replace: true },
-    );
-  }, [debouncedSearchQuery, selectedGenreId, selectedYear, updateParams]);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -149,8 +141,7 @@ function MoviesPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsGenrePickerOpen(false);
-    setIsYearPickerOpen(false);
+    closePickers();
     const nextSearch = searchQuery.trim();
     updateParams({
       search: nextSearch,
@@ -174,8 +165,7 @@ function MoviesPage() {
     setSearchQuery("");
     setSelectedGenreId("");
     setSelectedYear("");
-    setIsGenrePickerOpen(false);
-    setIsYearPickerOpen(false);
+    closePickers();
     setSearchParams({ page: "1" });
   };
 
@@ -219,6 +209,7 @@ function MoviesPage() {
             Icon={Film}
             isOpen={isGenrePickerOpen && !searchQuery.trim()}
             isDisabled={Boolean(searchQuery.trim())}
+            onClose={closePickers}
             onToggle={() => {
               setIsYearPickerOpen(false);
               setIsGenrePickerOpen((isOpen) => !isOpen);
@@ -229,6 +220,8 @@ function MoviesPage() {
                 !selectedGenreId ? s.optionButtonActive : ""
               }`}
               type="button"
+              role="menuitemradio"
+              aria-checked={!selectedGenreId}
               onClick={() => handleGenreSelect(null)}
             >
               All genres
@@ -241,6 +234,8 @@ function MoviesPage() {
                     : ""
                 }`}
                 type="button"
+                role="menuitemradio"
+                aria-checked={String(genre.id) === selectedGenreId}
                 key={genre.id}
                 onClick={() => handleGenreSelect(genre)}
               >
@@ -254,6 +249,7 @@ function MoviesPage() {
             value={selectedYear || "Any year"}
             Icon={CalendarDays}
             isOpen={isYearPickerOpen}
+            onClose={closePickers}
             onToggle={() => {
               setIsGenrePickerOpen(false);
               setIsYearPickerOpen((isOpen) => !isOpen);
@@ -265,6 +261,8 @@ function MoviesPage() {
                   selectedYear === year ? s.optionButtonActive : ""
                 }`}
                 type="button"
+                role="menuitemradio"
+                aria-checked={selectedYear === year}
                 key={year || "any-year"}
                 onClick={() => handleYearSelect(year)}
               >

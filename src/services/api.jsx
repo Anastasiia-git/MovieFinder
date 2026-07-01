@@ -29,24 +29,6 @@ export const getTrendingMovies = async () => {
   }
 };
 
-export const searchMovies = async (search) => {
-  try {
-    checkToken();
-    const response = await api.get("/search/movie", {
-      params: {
-        query: search,
-        include_adult: false,
-        language: "en-US",
-        page: 1,
-      },
-    });
-    return response.data.results;
-  } catch (error) {
-    console.error("Error searching movies:", error.response || error);
-    throw error;
-  }
-};
-
 export const getMovies = async ({ page = 1, genre, year, search } = {}) => {
   try {
     checkToken();
