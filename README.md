@@ -83,7 +83,7 @@ src
 
 ### Requirements
 
-- Node.js 18 or later
+- Node.js 24 (used in CI)
 - TMDB read access token
 
 ### Installation
@@ -115,6 +115,33 @@ npm run lint
 npm run test
 npm run preview
 ```
+
+## CI/CD
+
+GitHub Actions runs the [CI workflow](.github/workflows/ci.yml) on every push,
+on pull requests targeting `main`, and on manual dispatch. Using Node.js 24
+and the committed lockfile, it runs:
+
+1. `npm ci`
+2. `npm run lint`
+3. `npm test`
+4. `npm run build`
+
+The workflow caches npm downloads, cancels superseded runs for the same ref,
+and uses read-only repository permissions. Tests mock the TMDB API, so CI
+does not need a TMDB token. Its build is a validation build, not a deployment.
+
+Deployment uses the existing Vercel Git integration: branch pushes create
+preview deployments, and changes to the production branch publish the live
+app. Keep `VITE_TMDB_TOKEN` configured in Vercel for both Preview and Production;
+the GitHub workflow does not change those settings or deploy its build output.
+
+To require passing CI before merging, configure a GitHub branch protection
+rule or ruleset for `main` after the first successful workflow run. Require
+pull requests and the `Lint, test, and build` status check. This repository
+file does not configure branch protection; Vercel deployments and CI otherwise
+run independently, so a direct push to the production branch can deploy even
+when CI fails.
 
 ## What This Project Demonstrates
 
